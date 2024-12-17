@@ -23,20 +23,27 @@ public class GetAndPostExamples {
 
 	@Test
 	public void testPost() {
-		Map<String, Object> mp = new HashMap<String, Object>();
+		Map<String, Object> mp = new HashMap<String, Object>();// Create a Map to hold the request data
 //		mp.put("name", "Nuwani");
 //		mp.put("job", "Teacher");
 //		
 //		System.out.println(mp);
 
-		JSONObject request = new JSONObject(mp);
+		JSONObject request = new JSONObject(mp);// Convert the Map to JSONObject
 		request.put("name", "Nuwani");
 		request.put("job", "teacher");
 		System.out.println(request.toJSONString());// print and check whether it's in jason format
 
 		baseURI = "https://reqres.in/api";
-		given().header("Content-Type", "application/json").contentType(ContentType.JSON).accept(ContentType.JSON)
-				.body(request.toJSONString()).when().post("/users").then().statusCode(201).log().all();
+		given()
+		.header("Content-Type", "application/json")
+		.contentType(ContentType.JSON).accept(ContentType.JSON)
+		.body(request.toJSONString())// Use JSONObject as request body
+		.when()
+		.post("/users")// Endpoint
+		.then()
+		.statusCode(201)// Validate response
+        .log().all(); // Log response details
 
 	}
 
